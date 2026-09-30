@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login | Carma Credit Union</title>
+  <style>
+    :root {
+      --primary: #0c5bff;
+      --primary-dark: #083ea7;
+      --navy: #0d3b66;
+      --teal: #1ba7c6;
+      --bg: #edf5ff;
+      --text: #152033;
+      --muted: #667085;
+      --line: #dfeafc;
+      --card: #ffffff;
+      --shadow: 0 25px 60px rgba(12, 91, 255, 0.12);
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0; font-family: Arial, Helvetica, sans-serif;
+      background: linear-gradient(135deg, #eef7ff 0%, #f6fbff 100%);
+      color: var(--text);
+    }
+    a { text-decoration: none; color: inherit; }
+    .container { width: min(1180px, calc(100% - 32px)); margin: 0 auto; }
+    header {
+      background: rgba(255,255,255,0.82);
+      border-bottom: 1px solid rgba(223,234,252,0.85);
+      position: sticky; top: 0; backdrop-filter: blur(8px);
+      z-index: 10;
+    }
+    .nav { display: flex; justify-content: space-between; align-items: center; min-height: 80px; }
+    .brand { display: flex; align-items: center; gap: 10px; font-weight: 800; }
+    .brand-mark {
+      width: 42px; height: 42px; border-radius: 14px; display: grid; place-items: center;
+      background: linear-gradient(135deg, var(--navy) 0%, var(--teal) 45%, #8fe3d5 100%);
+      color: white; font-weight: 800; letter-spacing: -0.06em; font-size: 1.05rem;
+      box-shadow: 0 10px 25px rgba(13,59,102,0.22);
+      border: 2px solid rgba(255,255,255,0.75);
+    }
+    .brand-text { display: flex; align-items: baseline; gap: 6px; }
+    .brand-name { color: var(--navy); letter-spacing: -0.04em; }
+    .brand-tag { color: var(--teal); font-size: 0.7rem; letter-spacing: 0.18em; text-transform: uppercase; font-weight: 700; }
+    .top-link { color: var(--primary); font-weight: 700; }
+    .page-wrap {
+      min-height: calc(100vh - 80px);
+      display: grid; place-items: center; padding: 48px 0;
+    }
+    .login-card {
+      width: min(480px, 100%); background: white; border-radius: 28px; box-shadow: var(--shadow);
+      border: 1px solid rgba(223,234,252,0.8); overflow: hidden;
+    }
+    .login-header {
+      background: linear-gradient(135deg, var(--navy), var(--teal)); color: white;
+      padding: 30px 28px 24px; text-align: center;
+    }
+    .login-header h1 { margin: 0; font-size: clamp(2rem, 4vw, 2.6rem); letter-spacing: -0.05em; }
+    .login-header p { margin: 8px 0 0; color: rgba(255,255,255,0.82); }
+    .login-body { padding: 28px; }
+    form { display: grid; gap: 18px; }
+    label { display: grid; gap: 8px; font-weight: 700; color: var(--text); }
+    input {
+      width: 100%; border: 1px solid var(--line); border-radius: 12px; background: #f9fbff; padding: 14px 16px; font-size: 1rem; color: var(--text);
+      outline: none; transition: 0.2s ease;
+    }
+    input:focus { border-color: var(--primary); box-shadow: 0 0 0 4px rgba(12,91,255,0.1); background: white; }
+    .row { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-top: 6px; }
+    .checkbox { display: flex; align-items: center; gap: 8px; color: var(--muted); font-size: 0.92rem; }
+    .checkbox input { width: auto; }
+    .forgot { color: var(--primary); font-weight: 700; font-size: 0.92rem; }
+    .btn {
+      display: inline-flex; justify-content: center; align-items: center; padding: 14px 22px; border-radius: 12px; border: none; cursor: pointer;
+      font-weight: 700; transition: 0.2s ease; font-size: 1rem;
+    }
+    .btn-primary { background: linear-gradient(135deg, var(--primary), var(--primary-dark)); color: white; box-shadow: 0 14px 26px rgba(12,91,255,0.18); }
+    .btn-primary:hover { transform: translateY(-1px); }
+    .member-text { text-align: center; color: var(--muted); font-size: 0.94rem; margin-top: 14px; }
+    .member-text a { color: var(--primary); font-weight: 700; }
+    .success {
+      display: none; margin: 0; color: #0b7f5a; background: rgba(20,195,142,0.08); border: 1px solid rgba(20,195,142,0.2);
+      padding: 12px 14px; border-radius: 10px; font-weight: 700;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container nav">
+      <a href="index.html" class="brand" aria-label="Go to home page">
+        <div class="brand-mark">C</div>
+        <div class="brand-text">
+          <span class="brand-name">Carma</span>
+          <span class="brand-tag">CU</span>
+        </div>
+      </a>
+      <a href="create-account.html" class="top-link">New member? Create account</a>
+    </div>
+  </header>
+
+  <div class="page-wrap">
+    <div class="login-card">
+      <div class="login-header">
+        <h1>Welcome back</h1>
+        <p>Sign in to your member account</p>
+      </div>
+
+      <div class="login-body">
+        <form id="loginForm">
+          <label>
+            Email or username
+            <input type="text" name="email" autocomplete="username" placeholder="Email address or username" required />
+          </label>
+
+          <label>
+            Password
+            <input type="password" name="password" placeholder="Enter your password" required />
+          </label>
+
+          <div class="row">
+            <label class="checkbox">
+              <input type="checkbox" name="remember" />
+              Remember me
+            </label>
+            <a href="#" class="forgot">Forgot password?</a>
+          </div>
+
+          <button type="submit" class="btn btn-primary">Log in</button>
+          <p id="loginSuccess" class="success" aria-live="polite"></p>
+        </form>
+
+        <p class="member-text">Training profiles created by the administrator can sign in here after access is enabled. <a href="create-account.html">Create account</a></p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const loginForm = document.getElementById('loginForm');
+    const loginSuccess = document.getElementById('loginSuccess');
+
+    async function deriveTrainingHash(password, salt) {
+      const passwordMaterial = await crypto.subtle.importKey(
+        'raw',
+        new TextEncoder().encode(password),
+        'PBKDF2',
+        false,
+        ['deriveBits']
+      );
+      const bits = await crypto.subtle.deriveBits({
+        name: 'PBKDF2',
+        salt: new Uint8Array(salt),
+        iterations: 180000,
+        hash: 'SHA-256'
+      }, passwordMaterial, 256);
+      return Array.from(new Uint8Array(bits));
+    }
+
+    function hashesMatch(expected, actual) {
+      if (!Array.isArray(expected) || expected.length !== actual.length) return false;
+      let difference = 0;
+      for (let index = 0; index < expected.length; index += 1) {
+        difference |= expected[index] ^ actual[index];
+      }
+      return difference === 0;
+    }
+
+    loginForm.addEventListener('submit', async function (event) {
+      event.preventDefault();
+      const identity = loginForm.email.value.trim().toLowerCase();
+      const password = loginForm.password.value;
+
+      loginSuccess.style.display = 'none';
+      let profiles = [];
+      try {
+        const savedProfiles = JSON.parse(localStorage.getItem('carmaTrainingProfiles') || '[]');
+        profiles = Array.isArray(savedProfiles) ? savedProfiles : [];
+      } catch {
+        profiles = [];
+      }
+
+      const profile = profiles.find(function (candidate) {
+        return String(candidate.username || '').toLowerCase() === identity ||
+          String(candidate.email || '').toLowerCase() === identity;
+      });
+
+      if (!profile || !profile.accessEnabled || !profile.passwordSalt || !profile.passwordHash) {
+        loginSuccess.textContent = 'Sign-in failed. Check your username or email, password, and account access.';
+        loginSuccess.style.display = 'block';
+        return;
+      }
+
+      try {
+        const enteredHash = await deriveTrainingHash(password, profile.passwordSalt);
+        if (!hashesMatch(profile.passwordHash, enteredHash)) {
+          loginSuccess.textContent = 'Sign-in failed. Check your username or email, password, and account access.';
+          loginSuccess.style.display = 'block';
+          return;
+        }
+
+        localStorage.setItem('carmaUser', JSON.stringify({
+          email: profile.email,
+          fullName: profile.name,
+          trainingProfileId: profile.id
+        }));
+        localStorage.setItem('carmaTrainingSession', JSON.stringify({
+          profileId: profile.id,
+          createdAt: Date.now()
+        }));
+        loginSuccess.textContent = 'Account verified. Opening your dashboard...';
+        loginSuccess.style.display = 'block';
+        setTimeout(function () {
+          window.location.href = 'dashboard.html';
+        }, 250);
+      } catch {
+        loginSuccess.textContent = 'Password verification is unavailable in this browser. Use localhost or HTTPS.';
+        loginSuccess.style.display = 'block';
+      }
+    });
+  </script>
+</body>
+</html>

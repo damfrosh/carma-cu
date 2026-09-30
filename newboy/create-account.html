@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Create Account | Carma Credit Union</title>
+  <style>
+    :root {
+      --primary: #0c5bff;
+      --primary-dark: #083ea7;
+      --accent: #14c38e;
+      --navy: #0d3b66;
+      --teal: #1ba7c6;
+      --bg: #edf5ff;
+      --text: #152033;
+      --muted: #667085;
+      --line: #dfeafc;
+      --card: #ffffff;
+      --shadow: 0 25px 60px rgba(12, 91, 255, 0.12);
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: linear-gradient(135deg, #eef5ff 0%, #f6fbff 100%);
+      color: var(--text);
+    }
+    a { text-decoration: none; color: inherit; }
+    .container { width: min(1180px, calc(100% - 32px)); margin: 0 auto; }
+    header {
+      background: rgba(255,255,255,0.82);
+      border-bottom: 1px solid rgba(223,234,252,0.85);
+      position: sticky; top: 0; backdrop-filter: blur(8px);
+      z-index: 10;
+    }
+    .nav { display: flex; justify-content: space-between; align-items: center; min-height: 80px; }
+    .brand { display: flex; align-items: center; gap: 10px; font-weight: 800; }
+    .brand-mark {
+      width: 42px; height: 42px; border-radius: 14px; display: grid; place-items: center;
+      background: linear-gradient(135deg, var(--navy) 0%, var(--teal) 45%, #8fe3d5 100%);
+      color: white; font-weight: 800; letter-spacing: -0.06em; font-size: 1.05rem;
+      box-shadow: 0 10px 25px rgba(13,59,102,0.22);
+      border: 2px solid rgba(255,255,255,0.75);
+    }
+    .brand-text { display: flex; align-items: baseline; gap: 6px; }
+    .brand-name { color: var(--navy); letter-spacing: -0.04em; }
+    .brand-tag { color: var(--teal); font-size: 0.7rem; letter-spacing: 0.18em; text-transform: uppercase; font-weight: 700; }
+    .top-link { color: var(--primary); font-weight: 700; }
+    .page-wrap {
+      min-height: calc(100vh - 80px);
+      display: grid; place-items: center; padding: 48px 0;
+    }
+    .auth-shell {
+      width: min(980px, 100%);
+      background: white; border-radius: 30px; box-shadow: var(--shadow);
+      overflow: hidden; display: grid; grid-template-columns: 1.1fr 1.4fr;
+    }
+    .side-panel {
+      background: linear-gradient(180deg, var(--navy) 0%, #123d68 100%);
+      color: white; padding: 48px 34px; position: relative;
+    }
+    .side-panel::after {
+      content: ""; position: absolute; inset: auto -80px -80px auto; width: 220px; height: 220px;
+      background: rgba(27,167,198,0.22); border-radius: 50%;
+    }
+    .eyebrow { display: inline-block; background: rgba(255,255,255,0.1); padding: 8px 12px; border-radius: 999px; font-size: 0.8rem; font-weight: 700; }
+    .side-panel h1 { font-size: clamp(2rem, 3vw, 3.2rem); line-height: 1.1; letter-spacing: -0.05em; margin: 20px 0 18px; }
+    .side-panel p { margin: 0; color: rgba(255,255,255,0.82); line-height: 1.7; }
+    .mini-points { list-style: none; padding: 0; margin: 28px 0 0; display: grid; gap: 14px; }
+    .mini-points li { display: flex; align-items: center; gap: 10px; font-weight: 600; }
+    .mini-points li span {
+      width: 26px; height: 26px; border-radius: 50%; background: rgba(27,167,198,0.2); display: grid; place-items: center;
+      font-size: 0.9rem; color: white;
+    }
+    .form-panel { padding: 36px 34px 32px; }
+    .title-row {
+      display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 26px;
+    }
+    .title-row h2 { margin: 0; font-size: clamp(1.8rem, 2vw, 2.6rem); letter-spacing: -0.04em; }
+    .form-grid { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 18px; }
+    label { display: grid; gap: 8px; color: var(--text); font-weight: 700; font-size: 0.94rem; }
+    input, select {
+      width: 100%; border: 1px solid var(--line); border-radius: 12px; background: #f9fbff; padding: 14px 16px; font-size: 1rem; color: var(--text);
+      outline: none; transition: 0.2s ease;
+    }
+    input:focus, select:focus {
+      border-color: var(--primary); box-shadow: 0 0 0 4px rgba(12,91,255,0.1); background: white;
+    }
+    .full { grid-column: 1 / -1; }
+    .btn {
+      display: inline-flex; justify-content: center; align-items: center; padding: 14px 22px; border-radius: 12px; border: none; cursor: pointer;
+      font-weight: 700; transition: 0.2s ease; font-size: 1rem;
+    }
+    .btn-primary { background: linear-gradient(135deg, var(--primary), var(--primary-dark)); color: white; box-shadow: 0 14px 26px rgba(12,91,255,0.18); }
+    .btn-primary:hover { transform: translateY(-1px); }
+    .submit-row { display: flex; justify-content: space-between; align-items: center; gap: 18px; margin-top: 10px; flex-wrap: wrap; }
+    .meta { color: var(--muted); font-size: 0.93rem; }
+    .meta a { color: var(--primary); font-weight: 700; }
+    .success {
+      display: none; margin: 0; color: #0b7f5a; background: rgba(20,195,142,0.08); border: 1px solid rgba(20,195,142,0.2);
+      padding: 12px 14px; border-radius: 10px; flex: 1; min-width: 200px; font-weight: 700;
+    }
+    @media (max-width: 780px) {
+      .auth-shell { grid-template-columns: 1fr; }
+      .side-panel { padding-bottom: 28px; }
+      .form-grid { grid-template-columns: 1fr; }
+      .submit-row { align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container nav">
+      <a href="index.html" class="brand" aria-label="Go to home page">
+        <div class="brand-mark">C</div>
+        <div class="brand-text">
+          <span class="brand-name">Carma</span>
+          <span class="brand-tag">CU</span>
+        </div>
+      </a>
+      <a href="login.html" class="top-link">Already a member? Log in</a>
+    </div>
+  </header>
+
+  <div class="page-wrap">
+    <div class="auth-shell">
+      <aside class="side-panel">
+        <div class="eyebrow">Welcome to Carma</div>
+        <h1>Open a brighter future with us.</h1>
+        <p>Enjoy secure checking, savings, and member-first support built for your everyday goals and long-term growth.</p>
+        <ul class="mini-points">
+          <li><span>✓</span> No hidden fees</li>
+          <li><span>✓</span> Smart banking tools</li>
+          <li><span>✓</span> Live support anytime</li>
+        </ul>
+      </aside>
+
+      <main class="form-panel">
+        <div class="title-row">
+          <h2>Create account</h2>
+        </div>
+
+        <form id="createAccountForm">
+          <div class="form-grid">
+            <label>
+              Full name
+              <input type="text" name="fullName" placeholder="John Smith" required />
+            </label>
+            <label>
+              Email address
+              <input type="email" name="email" placeholder="john@email.com" required />
+            </label>
+            <label>
+              Phone number
+              <input type="tel" name="phone" placeholder="(555) 123-4567" required />
+            </label>
+            <label>
+              Date of birth
+              <input type="date" name="dob" required />
+            </label>
+            <label class="full">
+              Address
+              <input type="text" name="address" placeholder="123 Main Street" required />
+            </label>
+            <label>
+              City
+              <input type="text" name="city" placeholder="Houston" required />
+            </label>
+            <label>
+              State
+              <select name="state" required>
+                <option value="">Select state</option>
+                <option>Texas</option>
+                <option>California</option>
+                <option>Florida</option>
+                <option>New York</option>
+                <option>Illinois</option>
+              </select>
+            </label>
+            <label>
+              ZIP code
+              <input type="text" name="zip" placeholder="77002" required />
+            </label>
+            <label>
+              Account type
+              <select name="accountType" required>
+                <option value="">Select account</option>
+                <option>Checking</option>
+                <option>Savings</option>
+                <option>Business</option>
+              </select>
+            </label>
+            <label>
+              Initial deposit
+              <input type="text" name="deposit" placeholder="$250" required />
+            </label>
+            <label class="full">
+              Password
+              <input type="password" name="password" placeholder="Create a password" required />
+            </label>
+          </div>
+
+          <div class="submit-row">
+            <button type="submit" class="btn btn-primary">Create account</button>
+            <p id="formSuccess" class="success" aria-live="polite"></p>
+          </div>
+
+          <p class="meta" style="margin-top: 18px;">By continuing, you agree to the <a href="#">terms</a> and <a href="#">privacy policy</a>.</p>
+        </form>
+      </main>
+    </div>
+  </div>
+
+  <script>
+    const form = document.getElementById('createAccountForm');
+    const formSuccess = document.getElementById('formSuccess');
+
+    form.addEventListener('submit', function (event) {
+      event.preventDefault();
+      const name = form.fullName.value || 'Member';
+      const email = form.email.value.trim();
+
+      localStorage.setItem('carmaUser', JSON.stringify({
+        email,
+        fullName: name.trim()
+      }));
+      formSuccess.textContent = `Welcome, ${name}! Your Carma account application has been submitted successfully. Redirecting to your dashboard...`;
+      formSuccess.style.display = 'block';
+
+      setTimeout(function () {
+        window.location.href = 'dashboard.html';
+      }, 800);
+    });
+  </script>
+</body>
+</html>
